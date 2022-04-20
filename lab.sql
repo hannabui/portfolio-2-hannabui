@@ -1,5 +1,5 @@
-CREATE DATABASE `lab`;
-USE `lab`;
+CREATE DATABASE `portfolio`;
+USE `portfolio`;
 
 CREATE TABLE `users` (
   `id` int(11) AUTO_INCREMENT,
@@ -9,4 +9,4 @@ CREATE TABLE `users` (
 );
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(1, 'dan', '$2y$10$jhSIk2N5BnkEEzgEBWQDw.AUQIEcrH8V0AcNLfW2nkjTAH2WgAAlW');
+(1, 'exampleUsername', 'examplePassword');

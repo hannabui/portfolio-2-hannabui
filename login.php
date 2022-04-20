@@ -15,6 +15,10 @@
                 <input type="text" placeholder="Username" name="username">
 
                 <input type="password" placeholder="Password" name="password">
+
+                <input type="text" regex="/^.+@.+\..+$/" placeholder="Email" name="email">
+
+                <input type="text" regex="/^\(\d{3}\) \d{3}-\d{4}$/" placeholder="Number" name="number">
                 
                 <button type="submit">Submit</button>
     </form>

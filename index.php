@@ -14,7 +14,7 @@ include("security.php");
         if(security_loggedIn()) {
         echo("Update or Remove existing account ");
         echo("<br><br><a href='remove.php'>Remove Existing Username & Password</a><br><br>");
-        echo("<a href='update.php'>Update Password</a>");
+        echo("<a href='update.php'>Update Password, Email or Number</a>");
         echo("<br><br><a href='logout.php'>Logout</a>");
        } else {
         echo("Login or Signup");

@@ -18,6 +18,14 @@
                 <input type="password" placeholder="Current Password" name="password">
 
                 <input type="password" placeholder="New Password" name="newPassword">
+
+                <input type="text" placeholder="Current Email" name="email">
+
+                <input type="text" placeholder="New Email" name="newEmail">
+
+                <input type="text" placeholder="Current Number" name="number">
+
+                <input type="text" placeholder="New Phone Number" name="newNumber">
                     
                 <button type="submit">Submit</button>
         </form>
@@ -30,6 +38,8 @@
 
     <?php 
     security_updatePassword();
+    security_editEmail();
+    security_editNumber();
     ?>
     </body>
     </html>

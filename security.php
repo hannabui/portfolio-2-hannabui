@@ -6,13 +6,13 @@
         $status = false;
         
         // Validate
-        if(isset($_POST["username"]) and isset($_POST["password"])) {
+        if(isset($_POST["username"]) and isset($_POST["password"]) and isset($_POST["email"]) and isset($_POST["number"])) {
             $status = true;
         }
 
         return $status;
     }
-
+//LOGIN
     function security_login() {
         // Set a default value
         $status = false;
@@ -22,6 +22,7 @@
         database_connect();
         // Use the connection
         $status = database_verifyUser($result["username"], $result["password"]);
+        $status = database_verifyEmail($result["email"], $result["number"]);
         // Close connection
         database_close();
         // Check status
@@ -30,7 +31,7 @@
             setcookie("login", "yes");
         }
     }
-
+//ADD USER AND PASSWORD
     function security_addNewUser() {
         // Validate and sanitize.
         $result = security_sanitize();
@@ -50,8 +51,46 @@
         // Close connection.
         database_close();
     }
+//ADD EMAIL AND NUMBER 
+    function security_addEmail() {
+        $result = security_sanitize();
+        database_connect();
 
-    //validate POST input, sanitize, call deleteUser function
+        if(!database_verifyEmail($result["email"], $result["number"])) {
+ 
+            database_addEmail($result["email"], $result["number"]);
+        }
+        
+        database_close();
+    }
+//EDIT EMAIL
+    function security_editEmail() {
+        $result = security_sanitize();
+        
+        if(isset($POST["newEmail"]) and $result["email"] != null) {
+            $newEmail = htmlspecialchars($_POST["newEmail"]);
+            database_connect();
+
+            database_editEmail($result["email"], $newEmail);
+
+            database_close();
+        }
+    }
+//EDIT NUMBER
+    function security_editNumber() {
+        $result = security_sanitize();
+        
+        if(isset($POST["newNumber"]) and $result["number"] != null) {
+            $newNumber = htmlspecialchars($_POST["newNumber"]);
+            database_connect();
+
+            database_editNumber($result["number"], $newNumber);
+
+            database_close();
+        }
+    }
+
+//DELETE USER AND PASSWORD
     function security_deleteUser() {
         $result = security_sanitize();
         
@@ -62,7 +101,7 @@
             database_close();
         }
     }
-    //validate POST input, sanitize, call updatePassword function
+//UPDATE PASSWORD
     function security_updatePassword() {
         $result = security_sanitize();
         
@@ -90,13 +129,17 @@
         // Create an array of keys username and password
         $result = [
             "username" => null,
-            "password" => null
+            "password" => null,
+            "email" => null,
+            "number" => null
         ];
 
         if(security_validate()) {
             // After validation, sanitize text input.
             $result["username"] = htmlspecialchars($_POST["username"]);
             $result["password"] = htmlspecialchars($_POST["password"]);
+            $result["email"] = htmlspecialchars($_POST["email"]);
+            $result["number"] = htmlspecialchars($_POST["number"]);
         }
 
         // Return array
