@@ -76,6 +76,30 @@
         }
     }
 
+    function security_updateEmail() {
+        $result = security_sanitize();
+        if(isset($POST["newEmail"]) and $result["username"] != null and $result["email"] != null) {
+            $newEmail = htmlspecialchars($_POST["newEmail"]);
+            database_connect();
+
+            database_updateEmail($result["username"], $result["password"], $result["email"], $result["number"], $newEmail);
+
+            database_close();
+        }
+    }
+
+    function security_updateNumber() {
+        $result = security_sanitize();
+        if(isset($POST["newNumber"]) and $result["username"] != null and $result["number"] != null) {
+            $newNumber = htmlspecialchars($_POST["newNumber"]);
+            database_connect();
+
+            database_updateNumber($result["username"], $result["password"], $result["email"], $result["number"], $newNumber);
+
+            database_close();
+        }
+    }
+
     function security_loggedIn() {
         // Does a cookie exist?
         return isset($_COOKIE["login"]);

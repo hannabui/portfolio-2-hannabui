@@ -17,15 +17,15 @@
 
                 <input type="password" placeholder="Current Password" name="password">
 
-                <input type="password" placeholder="New Password" name="newPassword">
+                <input type="password" placeholder="New Password" name="newPassword"><br/>
 
                 <input type="text" placeholder="Current Email" name="email">
 
-                <input type="text" placeholder="New Email" name="newEmail">
+                <input type="text" placeholder="New Email" name="newEmail"><br/>
 
                 <input type="text" placeholder="Current Number" name="number">
 
-                <input type="text" placeholder="New Phone Number" name="newNumber">
+                <input type="text" placeholder="New Phone Number" name="newNumber"><br/>
                     
                 <button type="submit">Submit</button>
         </form>

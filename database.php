@@ -71,17 +71,31 @@
         }
     }
 //accepting the username, password and new password
-    function database_updatePassword($username, $password, $newPassword) {
+    function database_updatePassword($username, $password, $email, $number, $newPassword) {
         //using the global connection
         global $connection;
         //verifying if the data exists before changing it
-            if(database_verifyUser($username, $password)) {
+            if(database_verifyUser($username, $password, $email, $number)) {
             //creating a new hash for the new password
                 $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
             //UPDATE statement with a WHERE expression to update the password hash to the table 'users'
                 mysqli_query($connection, "UPDATE users SET password = '{$newPassword}' WHERE username = '{$username}';");
     }
 }
+
+    function database_updateEmail($username, $password, $email, $number) {
+        global $connection;
+        if(database_verifyUser($username, $password, $email, $number)) {
+            mysqli_query($connection, "UPDATE users SET email = '{$newEmail}' WHERE username = '{$username}'; ");
+        }
+    }
+
+    function database_updateNumber($username, $password, $email, $number) {
+        global $connection;
+        if(database_verifyUser($username, $password, $email, $number)) {
+            mysqli_query($connection, "UPDATE users SET number = '{$newNumber}' WHERE username = '{$username}'; ");
+        }
+    }
 
     function database_close() {
         // user global connection
