@@ -38,8 +38,6 @@
 
     <?php 
     security_updatePassword();
-    security_editEmail();
-    security_editNumber();
     ?>
     </body>
     </html>

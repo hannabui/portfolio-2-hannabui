@@ -12,7 +12,7 @@
 
         return $status;
     }
-//LOGIN
+
     function security_login() {
         // Set a default value
         $status = false;
@@ -21,8 +21,7 @@
         // Open connection
         database_connect();
         // Use the connection
-        $status = database_verifyUser($result["username"], $result["password"]);
-        $status = database_verifyEmail($result["email"], $result["number"]);
+        $status = database_verifyUser($result["username"], $result["password"], $result["email"], $result["number"]);
         // Close connection
         database_close();
         // Check status
@@ -31,7 +30,7 @@
             setcookie("login", "yes");
         }
     }
-//ADD USER AND PASSWORD
+
     function security_addNewUser() {
         // Validate and sanitize.
         $result = security_sanitize();
@@ -42,66 +41,28 @@
         //
         // We want to make sure we don't add
         //  duplicate values.
-        if(!database_verifyUser($result["username"], $result["password"])) {
+        if(!database_verifyUser($result["username"], $result["password"], $result["email"], $result["number"])) {
             // Username does not exist.
             // Add a new one.
-            database_addUser($result["username"], $result["password"]);
+            database_addUser($result["username"], $result["password"], $result["email"], $result["number"]);
         }
         
         // Close connection.
         database_close();
     }
-//ADD EMAIL AND NUMBER 
-    function security_addEmail() {
-        $result = security_sanitize();
-        database_connect();
 
-        if(!database_verifyEmail($result["email"], $result["number"])) {
- 
-            database_addEmail($result["email"], $result["number"]);
-        }
-        
-        database_close();
-    }
-//EDIT EMAIL
-    function security_editEmail() {
-        $result = security_sanitize();
-        
-        if(isset($POST["newEmail"]) and $result["email"] != null) {
-            $newEmail = htmlspecialchars($_POST["newEmail"]);
-            database_connect();
-
-            database_editEmail($result["email"], $newEmail);
-
-            database_close();
-        }
-    }
-//EDIT NUMBER
-    function security_editNumber() {
-        $result = security_sanitize();
-        
-        if(isset($POST["newNumber"]) and $result["number"] != null) {
-            $newNumber = htmlspecialchars($_POST["newNumber"]);
-            database_connect();
-
-            database_editNumber($result["number"], $newNumber);
-
-            database_close();
-        }
-    }
-
-//DELETE USER AND PASSWORD
+    //validate POST input, sanitize, call deleteUser function
     function security_deleteUser() {
         $result = security_sanitize();
         
-        if(database_verifyUser($result["username"], $result["password"])) {
+        if(database_verifyUser($result["username"], $result["password"], $result["email"], $result["number"])) {
             database_connect();
 
-            database_deleteUser($result["username"], $result["password"]);
+            database_deleteUser($result["username"], $result["password"], $result["email"], $result["number"]);
             database_close();
         }
     }
-//UPDATE PASSWORD
+    //validate POST input, sanitize, call updatePassword function
     function security_updatePassword() {
         $result = security_sanitize();
         
@@ -109,7 +70,7 @@
             $newPassword = htmlspecialchars($_POST["newPassword"]);
             database_connect();
 
-            database_updatePassword($result["username"], $result["password"], $newPassword);
+            database_updatePassword($result["username"], $result["password"], $result["email"], $result["number"], $newPassword);
 
             database_close();
         }

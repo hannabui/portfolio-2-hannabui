@@ -30,7 +30,6 @@ include("security.php");
 
 <?php
 security_addNewUser();
-security_addEmail();
 ?>
 </body>
 </html>
