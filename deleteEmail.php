@@ -7,20 +7,16 @@
         <title>Remove</title>
     </head>
     <body>
-        <h2>Remove Existing Username & Password</h2>
+        <h2>Delete Email</h2>
 
     <?php
         if(security_loggedIn()) {
     ?>
-        <h4>Enter Existing Username & Password to Delete</h4>
-        <form action="remove.php" method="POST">   
+        <h4>Enter Username and Email to delete Email</h4>
+        <form action="deleteEmail.php" method="POST">   
                     <input type="text" placeholder="Username" name="username">
 
-                    <input type="password" placeholder="Password" name="password">
-
                     <input type="text" placeholder="Email" name="email">
-
-                    <input type="text" placeholder="Phone Number" name="number">
                     
                     <button type="submit">Submit</button>
         </form>

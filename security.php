@@ -54,50 +54,70 @@
     //validate POST input, sanitize, call deleteUser function
     function security_deleteUser() {
         $result = security_sanitize();
+        database_connect();
         
         if(database_verifyUser($result["username"], $result["password"], $result["email"], $result["number"])) {
-            database_connect();
 
             database_deleteUser($result["username"], $result["password"], $result["email"], $result["number"]);
-            database_close();
         }
+        database_close();
+    }
+    function security_deleteEmail() {
+        $result = security_sanitize();
+        database_connect();
+        
+        if(database_verifyUser($result["username"], $result["password"], $result["email"], $result["number"])) {
+
+            database_deleteEmail($result["email"]);
+        }
+        database_close();
+    }
+    function security_deleteNumber() {
+        $result = security_sanitize();
+        database_connect();
+        
+        if(database_verifyUser($result["username"], $result["password"], $result["email"], $result["number"])) {
+
+            database_deleteNumber($result["number"]);
+        }
+        database_close();
     }
     //validate POST input, sanitize, call updatePassword function
     function security_updatePassword() {
         $result = security_sanitize();
+        database_connect();
         
         if(isset($POST["newPassword"]) and $result["username"] != null and $result["password"] != null) {
             $newPassword = htmlspecialchars($_POST["newPassword"]);
-            database_connect();
 
-            database_updatePassword($result["username"], $result["password"], $newPassword);
+            database_updatePassword($result["username"], $result["password"], $result["email"], $result["number"], $newPassword);
 
-            database_close();
         }
+        database_close();
     }
 
     function security_updateEmail() {
         $result = security_sanitize();
+        database_connect();
         if(isset($POST["newEmail"]) and $result["username"] != null and $result["email"] != null) {
             $newEmail = htmlspecialchars($_POST["newEmail"]);
-            database_connect();
 
-            database_updateEmail($result["username"], $result["email"], $newEmail);
+            database_updateEmail($result["username"], $result["password"], $result["email"], $result["number"], $newEmail);
 
-            database_close();
         }
+        database_close();
     }
 
     function security_updateNumber() {
         $result = security_sanitize();
+        database_connect();
         if(isset($POST["newNumber"]) and $result["username"] != null and $result["number"] != null) {
             $newNumber = htmlspecialchars($_POST["newNumber"]);
-            database_connect();
 
-            database_updateNumber($result["username"], $result["number"], $newNumber);
+            database_updateNumber($result["username"], $result["password"], $result["email"], $result["number"], $newNumber);
 
-            database_close();
         }
+        database_close();
     }
 
     function security_loggedIn() {

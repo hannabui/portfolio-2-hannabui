@@ -4,21 +4,17 @@
 
     <html>
     <head>
-        <title>Remove</title>
+        <title>Delete Number</title>
     </head>
     <body>
-        <h2>Remove Existing Username & Password</h2>
+        <h2>Delete Phone Number</h2>
 
     <?php
         if(security_loggedIn()) {
     ?>
-        <h4>Enter Existing Username & Password to Delete</h4>
-        <form action="remove.php" method="POST">   
+        <h4>Enter Username and Phone number to delete Phone number</h4>
+        <form action="deleteNumber.php" method="POST">   
                     <input type="text" placeholder="Username" name="username">
-
-                    <input type="password" placeholder="Password" name="password">
-
-                    <input type="text" placeholder="Email" name="email">
 
                     <input type="text" placeholder="Phone Number" name="number">
                     
@@ -31,7 +27,7 @@
     ?>
 
     <?php
-    security_deleteUser();
+    security_deleteNumber();
     ?>
     </body>
     </html>

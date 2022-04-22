@@ -19,7 +19,7 @@
         $database = "portfolio";
 
         if($connection == null) {
-            $connection = mysqli_connect($server, $username, $password, $email, $number, $database);
+            $connection = mysqli_connect($server, $username, $password, $database);
         }
     }
 
@@ -70,8 +70,22 @@
                 mysqli_query($connection, "DELETE FROM users WHERE username = '{$username}';");
         }
     }
+    function database_deleteEmail($email) {
+        global $connection;
+
+        if(database_verifyUser($username, $password, $email, $number)) {
+            mysqli_query($connection, "DELETE FROM users SET email = '{}' WHERE username = '{$username}';");
+        }
+    }
+    function database_deleteNumber($number) {
+        global $connection;
+
+        if(database_verifyUser($username, $password, $email, $number)) {
+            mysqli_query($connection, "DELETE FROM users SET number = '{}' WHERE username = '{$username}';");
+        }
+    }
 //accepting the username, password and new password
-    function database_updatePassword($username, $password, $email, $number, $newPassword) {
+    function database_updatePassword($username, $password, $newPassword) {
         //using the global connection
         global $connection;
         //verifying if the data exists before changing it
@@ -83,14 +97,14 @@
     }
 }
 
-    function database_updateEmail($username, $password, $email, $number) {
+    function database_updateEmail($username, $email, $newEmail) {
         global $connection;
         if(database_verifyUser($username, $password, $email, $number)) {
             mysqli_query($connection, "UPDATE users SET email = '{$newEmail}' WHERE username = '{$username}'; ");
         }
     }
 
-    function database_updateNumber($username, $password, $email, $number) {
+    function database_updateNumber($username, $number, $newNumber) {
         global $connection;
         if(database_verifyUser($username, $password, $email, $number)) {
             mysqli_query($connection, "UPDATE users SET number = '{$newNumber}' WHERE username = '{$username}'; ");
