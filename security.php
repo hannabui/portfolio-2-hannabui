@@ -70,7 +70,7 @@
             $newPassword = htmlspecialchars($_POST["newPassword"]);
             database_connect();
 
-            database_updatePassword($result["username"], $result["password"], $result["email"], $result["number"], $newPassword);
+            database_updatePassword($result["username"], $result["password"], $newPassword);
 
             database_close();
         }
@@ -82,7 +82,7 @@
             $newEmail = htmlspecialchars($_POST["newEmail"]);
             database_connect();
 
-            database_updateEmail($result["username"], $result["password"], $result["email"], $result["number"], $newEmail);
+            database_updateEmail($result["username"], $result["email"], $newEmail);
 
             database_close();
         }
@@ -94,7 +94,7 @@
             $newNumber = htmlspecialchars($_POST["newNumber"]);
             database_connect();
 
-            database_updateNumber($result["username"], $result["password"], $result["email"], $result["number"], $newNumber);
+            database_updateNumber($result["username"], $result["number"], $newNumber);
 
             database_close();
         }

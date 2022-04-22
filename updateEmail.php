@@ -4,28 +4,20 @@
 
     <html>
     <head>
-        <title>Login</title>
+        <title>Update Email</title>
     </head>
     <body>
         
     <?php
         if(security_loggedIn()) {
     ?>
-        <h2>Update Password</h2>
-        <form action="update.php" method="POST">   
+        <h2>Update Email</h2>
+        <form action="updateEmail.php" method="POST">   
                 <input type="text" placeholder="Username" name="username">
-
-                <input type="password" placeholder="Current Password" name="password">
-
-                <input type="password" placeholder="New Password" name="newPassword"><br/>
 
                 <input type="text" placeholder="Current Email" name="email">
 
                 <input type="text" placeholder="New Email" name="newEmail"><br/>
-
-                <input type="text" placeholder="Current Number" name="number">
-
-                <input type="text" placeholder="New Phone Number" name="newNumber"><br/>
                     
                 <button type="submit">Submit</button>
         </form>
@@ -37,7 +29,7 @@
 
 
     <?php 
-    security_updatePassword();
+    security_updateEmail();
     ?>
     </body>
     </html>
