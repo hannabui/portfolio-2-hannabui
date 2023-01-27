@@ -61,8 +61,9 @@
         return $status;
     }
 //accepting the username and password
+
     function database_deleteUser($username, $password, $email, $number) {
-        //using the global connection
+
         global $connection;
         //verifying if the data exists before changing it
             if(database_verifyUser($username, $password, $email, $number)) {
@@ -70,23 +71,19 @@
                 mysqli_query($connection, "DELETE FROM users WHERE username = '{$username}';");
         }
     }
+
     function database_deleteEmail($email) {
         global $connection;
-
-        if(database_verifyUser($username, $password, $email, $number)) {
-            mysqli_query($connection, "DELETE FROM users SET email = '{}' WHERE username = '{$username}';");
-        }
+            mysqli_query($connection, "DELETE FROM users WHERE username = '{$username}';");
     }
+
     function database_deleteNumber($number) {
         global $connection;
-
-        if(database_verifyUser($username, $password, $email, $number)) {
-            mysqli_query($connection, "DELETE FROM users SET number = '{}' WHERE username = '{$username}';");
-        }
+            mysqli_query($connection, "DELETE FROM users WHERE username = '{$username}';");
     }
 //accepting the username, password and new password
     function database_updatePassword($username, $password, $newPassword) {
-        //using the global connection
+
         global $connection;
         //verifying if the data exists before changing it
             if(database_verifyUser($username, $password, $email, $number)) {
@@ -96,20 +93,19 @@
                 mysqli_query($connection, "UPDATE users SET password = '{$newPassword}' WHERE username = '{$username}';");
     }
 }
-
     function database_updateEmail($username, $email, $newEmail) {
-        global $connection;
-        if(database_verifyUser($username, $password, $email, $number)) {
-            mysqli_query($connection, "UPDATE users SET email = '{$newEmail}' WHERE username = '{$username}'; ");
-        }
-    }
 
-    function database_updateNumber($username, $number, $newNumber) {
         global $connection;
-        if(database_verifyUser($username, $password, $email, $number)) {
-            mysqli_query($connection, "UPDATE users SET number = '{$newNumber}' WHERE username = '{$username}'; ");
-        }
-    }
+
+                mysqli_query($connection, "UPDATE users SET password = '{$newEmail}' WHERE username = '{$username}';");
+
+}
+function database_updateNumber($username, $number, $newNumber) {
+
+    global $connection;
+
+            mysqli_query($connection, "UPDATE users SET password = '{$newNumber}' WHERE username = '{$username}';");
+}
 
     function database_close() {
         // user global connection

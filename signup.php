@@ -16,9 +16,9 @@ include("security.php");
           
           <input type="password" placeholder="Password" name="password">
 
-          <input type="text" regex="/^.+@.+\..+$/" placeholder="Email" name="email">
+          <input type="text" placeholder="Email" name="email">
 
-          <input type="text" regex="/^\(\d{3}\) \d{3}-\d{4}$/" placeholder="Phone Number" name="number">
+          <input type="text" placeholder="Phone Number" name="number">
           
           <button type="submit">Submit</button>
         </form>

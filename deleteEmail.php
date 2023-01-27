@@ -27,7 +27,7 @@
     ?>
 
     <?php
-    security_deleteUser();
+    security_deleteEmail();
     ?>
     </body>
     </html>

@@ -32,92 +32,77 @@
     }
 
     function security_addNewUser() {
-        // Validate and sanitize.
+       
         $result = security_sanitize();
-        // Open connection.
+      
         database_connect();
 
-        // Use connection.
-        //
-        // We want to make sure we don't add
-        //  duplicate values.
         if(!database_verifyUser($result["username"], $result["password"], $result["email"], $result["number"])) {
-            // Username does not exist.
-            // Add a new one.
+     
             database_addUser($result["username"], $result["password"], $result["email"], $result["number"]);
         }
         
-        // Close connection.
         database_close();
     }
-
-    //validate POST input, sanitize, call deleteUser function
+//delete account
     function security_deleteUser() {
         $result = security_sanitize();
-        database_connect();
-        
-        if(database_verifyUser($result["username"], $result["password"], $result["email"], $result["number"])) {
 
-            database_deleteUser($result["username"], $result["password"], $result["email"], $result["number"]);
-        }
+        database_connect();
+
+        database_deleteUser($result["username"], $result["password"], $result["email"], $result["number"]);
+
         database_close();
+
     }
     function security_deleteEmail() {
         $result = security_sanitize();
-        database_connect();
-        
-        if(database_verifyUser($result["username"], $result["password"], $result["email"], $result["number"])) {
 
-            database_deleteEmail($result["email"]);
-        }
+        database_connect();
+
+        database_deleteEmail($result["email"]);
+
         database_close();
+
     }
     function security_deleteNumber() {
         $result = security_sanitize();
-        database_connect();
-        
-        if(database_verifyUser($result["username"], $result["password"], $result["email"], $result["number"])) {
 
-            database_deleteNumber($result["number"]);
-        }
+        database_connect();
+
+        database_deleteNumber($result["number"]);
+
         database_close();
+
     }
-    //validate POST input, sanitize, call updatePassword function
+//update password by verifying current password
     function security_updatePassword() {
         $result = security_sanitize();
-        database_connect();
         
-        if(isset($POST["newPassword"]) and $result["username"] != null and $result["password"] != null) {
-            $newPassword = htmlspecialchars($_POST["newPassword"]);
+        database_connect();
+        if(database_verifyUser($result["username"], $result["password"], $result["email"], $result["number"])) {
 
-            database_updatePassword($result["username"], $result["password"], $result["email"], $result["number"], $newPassword);
-
+            database_updatePassword($result["username"], $result["password"], $_POST["newPassword"]);
         }
-        database_close();
+            database_close();
     }
-
     function security_updateEmail() {
         $result = security_sanitize();
+        
         database_connect();
-        if(isset($POST["newEmail"]) and $result["username"] != null and $result["email"] != null) {
-            $newEmail = htmlspecialchars($_POST["newEmail"]);
 
-            database_updateEmail($result["username"], $result["password"], $result["email"], $result["number"], $newEmail);
-
-        }
-        database_close();
+            database_updateEmail($result["username"], $result["email"], $_POST["newEmail"]);
+        
+            database_close();
     }
-
     function security_updateNumber() {
         $result = security_sanitize();
+        
         database_connect();
-        if(isset($POST["newNumber"]) and $result["username"] != null and $result["number"] != null) {
-            $newNumber = htmlspecialchars($_POST["newNumber"]);
-
-            database_updateNumber($result["username"], $result["password"], $result["email"], $result["number"], $newNumber);
-
-        }
-        database_close();
+    
+            database_updateNumber($result["username"], $result["number"], $_POST["newNumber"]);
+    
+            database_close();
     }
 
     function security_loggedIn() {
